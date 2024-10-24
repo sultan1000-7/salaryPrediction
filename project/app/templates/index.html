@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    { % load static % }
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="{% static 'app/css/style.css' %}"/>
+</head>
+<body>
+<div class="menu">
+    <button onclick="toggleForecast()">Совершить прогноз</button>
+    <button>Просмотр графиков</button>
+</div>
+<div id="methods" class="methods" style="display: none;">
+    <button id="linear">Линейная регрессии</button>
+    <button id="boosting">Бустинг</button>
+    <button id="knn">Метод k-ближайших соседей (k-NN)</button>
+    <button id="svm">Метод опорных векторов (SVM)</button>
+</div>
+<div id="inputProfession" class="input-profession" style="display: none;">
+    <div id="currentMethod">Текущий метод: Линейная регрессия</div>
+    <input type="text" id="profession" name="profession" class="main-input" placeholder="Название профессии">
+    <div id="inputContainer" class="input-container">
+        <select id="experience" name="experience" class="other-input">
+            <option value="">Опыт работы</option>
+            <option value="no_experience">Нет опыта</option>
+            <option value="1_to_3_years">От 1 года до 3 лет</option>
+            <option value="3_to_6_years">От 3 до 6 лет</option>
+            <option value="more_than_6_years">Более 6 лет</option>
+        </select>
+        <select id="employment" name="employment" class="other-input">
+            <option value="">Тип занятости</option>
+            <option value="full_employment">Полная занятость</option>
+            <option value="internship">Стажировка</option>
+            <option value="project_work">Проектная работа</option>
+        </select>
+        <select id="schedule" name="schedule" class="other-input">
+            <option value="">График работы</option>
+            <option value="full_day">Полный день</option>
+            <option value="remote_work">Удаленная работа</option>
+            <option value="flexible_schedule">Гибкий график</option>
+        </select>
+        <div id="regionContainer">
+            <input type="text" id="region1" name="region1" class="other-input" placeholder="Регион"
+                   onclick="openModal(this)" autocomplete="off">
+            <input type="text" id="region2" name="region2" class="other-input" placeholder="Регион"
+                   onclick="openModal(this)" autocomplete="off">
+            <input type="text" id="region3" name="region3" class="other-input" placeholder="Регион"
+                   onclick="openModal(this)" autocomplete="off">
+        </div>
+        <div id="myModal" class="modal">
+            <!-- Содержимое модального окна -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <input type="text" id="search" onkeyup="searchFunction()" placeholder="Поиск по регионам...">
+                <ul id="regionList">
+                    <li onclick="selectRegion(this)">Москва</li>
+                    <li onclick="selectRegion(this)">Санкт-Петербург</li>
+                    <li onclick="selectRegion(this)">Екатеринбург</li>
+                    <li onclick="selectRegion(this)">Новосибирск</li>
+                    <li onclick="selectRegion(this)">Майкоп</li>
+                    <li onclick="selectRegion(this)">Горно-Алтайск</li>
+                    <li onclick="selectRegion(this)">Барнаул</li>
+                    <li onclick="selectRegion(this)">Архангельск</li>
+                    <li onclick="selectRegion(this)">Астрахань</li>
+                    <li onclick="selectRegion(this)">Брянск</li>
+                    <li onclick="selectRegion(this)">Владивосток</li>
+                    <li onclick="selectRegion(this)">Волгоград</li>
+                    <li onclick="selectRegion(this)">Воронеж</li>
+                    <li onclick="selectRegion(this)">Махачкала</li>
+                    <li onclick="selectRegion(this)">Иркутск</li>
+                    <li onclick="selectRegion(this)">Нальчик</li>
+                    <li onclick="selectRegion(this)">Калининград</li>
+                    <li onclick="selectRegion(this)">Элиста</li>
+                    <li onclick="selectRegion(this)">Калуга</li>
+                    <li onclick="selectRegion(this)">Кемерово</li>
+                    <li onclick="selectRegion(this)">Сыктывкар</li>
+                    <li onclick="selectRegion(this)">Кострома</li>
+                    <li onclick="selectRegion(this)">Краснодар</li>
+                    <li onclick="selectRegion(this)">Красноярск</li>
+                    <li onclick="selectRegion(this)">Курган</li>
+                    <li onclick="selectRegion(this)">Курск</li>
+                    <li onclick="selectRegion(this)">Магадан</li>
+                    <li onclick="selectRegion(this)">Саранск</li>
+                    <li onclick="selectRegion(this)">Мурманск</li>
+                    <li onclick="selectRegion(this)">Нижний Новгород</li>
+                    <li onclick="selectRegion(this)">Великий Новгород</li>
+                    <li onclick="selectRegion(this)">Омск</li>
+                    <li onclick="selectRegion(this)">Орел</li>
+                    <li onclick="selectRegion(this)">Оренбург</li>
+                    <li onclick="selectRegion(this)">Пенза</li>
+                    <li onclick="selectRegion(this)">Пермь</li>
+                    <li onclick="selectRegion(this)">Петрозаводск</li>
+                    <li onclick="selectRegion(this)">Псков</li>
+                    <li onclick="selectRegion(this)">Ростов-на-Дону</li>
+                    <li onclick="selectRegion(this)">Рязань</li>
+                    <li onclick="selectRegion(this)">Самара</li>
+                    <li onclick="selectRegion(this)">Саратов</li>
+                    <li onclick="selectRegion(this)">Якутск</li>
+                    <li onclick="selectRegion(this)">Южно-Сахалинск</li>
+                    <li onclick="selectRegion(this)">Владикавказ</li>
+                    <li onclick="selectRegion(this)">Смоленск</li>
+                    <li onclick="selectRegion(this)">Ставрополь</li>
+                    <li onclick="selectRegion(this)">Тамбов</li>
+                    <li onclick="selectRegion(this)">Казань</li>
+                    <li onclick="selectRegion(this)">Тверь</li>
+                    <li onclick="selectRegion(this)">Томск</li>
+                    <li onclick="selectRegion(this)">Кызыл</li>
+                    <li onclick="selectRegion(this)">Тула</li>
+                    <li onclick="selectRegion(this)">Тюмень</li>
+                    <li onclick="selectRegion(this)">Ижевск</li>
+                    <li onclick="selectRegion(this)">Ульяновск</li>
+                    <li onclick="selectRegion(this)">Уфа</li>
+                    <li onclick="selectRegion(this)">Хабаровск</li>
+                    <li onclick="selectRegion(this)">Челябинск</li>
+                    <li onclick="selectRegion(this)">Грозный</li>
+                    <li onclick="selectRegion(this)">Чита</li>
+                    <li onclick="selectRegion(this)">Чебоксары</li>
+                    <li onclick="selectRegion(this)">Сочи</li>
+                    <li onclick="selectRegion(this)">Норильск</li>
+                </ul>
+            </div>
+        </div>
+        <button onclick="sendData()">Начать</button>
+    </div>
+</div>
+<div id="dataPlace" style="display: none;">
+    <div id="rmse"></div>
+    <div id="y_pred"></div>
+</div>
+<div class="container">
+    <div id="imageContainer1"></div>
+    <div id="imageContainer2"></div>
+</div>
+<script type="text/JavaScript">
+    var region
+    var regionCount = 1;
+
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    var currentMethod = 'Линейная регрессия';
+
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    document.getElementById('linear').addEventListener('click', function() {
+        document.getElementById('currentMethod').textContent = 'Текущий метод: Линейная регрессия';
+        currentMethod = 'Линейная регрессия';
+    });
+    document.getElementById('boosting').addEventListener('click', function() {
+        document.getElementById('currentMethod').textContent = 'Текущий метод: Бустинг';
+        currentMethod = 'Бустинг';
+    });
+    document.getElementById('knn').addEventListener('click', function() {
+        document.getElementById('currentMethod').textContent = 'Текущий метод: Метод k-ближайших соседей (k-NN)';
+        currentMethod = 'Метод k-ближайших соседей (k-NN)';
+    });
+    document.getElementById('svm').addEventListener('click', function() {
+        document.getElementById('currentMethod').textContent = 'Текущий метод: Метод опорных векторов (SVM)';
+        currentMethod = 'Метод опорных векторов (SVM)';
+    });
+
+    function searchFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("regionList");
+        li = ul.getElementsByTagName('li');
+
+        for (i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+    function selectRegion(element) {
+        region.value = element.textContent;
+        modal.style.display = "none";
+    }
+
+    function toggleForecast() {
+        var profession = document.getElementById("inputProfession");
+        var methods = document.getElementById("methods")
+        if (profession.style.display === "none") {
+            profession.style.display = "block";
+            methods.style.display = "flex";
+
+        } else {
+            profession.style.display = "none";
+            methods.style.display = "none";
+        }
+    }
+    function openModal(input) {
+        modal.style.display = "block";
+        region = document.getElementById(input.id)
+
+    }
+
+    function addRegionInput() {
+        var newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.name = "region";
+        newInput.className = "other-input";
+        newInput.placeholder = "Регион";
+        newInput.onclick = function() { openModal(this); };
+        document.getElementById('regionContainer').appendChild(newInput);
+    }
+
+    function sendData() {
+        var profession = document.getElementById('profession').value;
+        var experience = document.getElementById('experience').value;
+        var employment = document.getElementById('employment').value;
+        var schedule = document.getElementById('schedule').value;
+        var regions = [];
+        for (var i = 1; i <= 3; i++) {
+            let text = document.getElementById('region' + i).value
+            if (text !== "" && text !== undefined && text !== null){
+                regions.push(text)
+            }
+        }
+
+        fetch('/data_for_forecast', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'profession': profession,
+                'experience': experience,
+                'employment': employment,
+                'schedule': schedule,
+                'regions': JSON.stringify(regions),
+                'method': currentMethod
+            })
+        })
+        .then(response => response.json())
+        .then(response => {
+            if (response.status === 'ok') {
+                fetch('/get_data_for_forecast', {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Записываем данные в div с id "dataPlace"
+                    var rmse = data.rmse;
+                    var y_pred = data.y_pred;
+                    var rmseElement = document.getElementById('rmse');
+                    rmseElement.innerHTML = 'RMSE: ' + rmse.toFixed(2);
+                    // Вычисляем значение цвета в зависимости от rmse
+                    var greenComponent = Math.floor((1 - rmse) * 255);
+                    var redComponent = Math.floor(rmse * 255);
+                    rmseElement.style.color = 'rgb(' + redComponent + ',' + greenComponent + ',0)';
+                    var size = Math.floor(y_pred.length / 3);
+                    var y_pred1 = y_pred.slice(0, size);
+                    var y_pred2 = y_pred.slice(size, 2*size);
+                    var y_pred3 = y_pred.slice(2*size, y_pred.length);
+                    var y_pred4 = y_pred.slice(0, y_pred.length);
+
+                    // Вычисляем среднее значение каждого массива
+                    var avg1 = y_pred1.reduce((a, b) => a + b, 0) / y_pred1.length;
+                    var avg2 = y_pred2.reduce((a, b) => a + b, 0) / y_pred2.length;
+                    var avg3 = y_pred3.reduce((a, b) => a + b, 0) / y_pred3.length;
+                    var avg4 = y_pred4.reduce((a, b) => a + b, 0) / y_pred4.length;
+
+                    // Вставляем средние значения в элемент с id "y_pred"
+                    document.getElementById('y_pred').innerHTML =
+                        'Предсказанные значения:<br>' + avg1.toFixed(2) + '<br>' + avg2.toFixed(2) + '<br>' + avg3.toFixed(2) + '<br>' + avg4.toFixed(2);
+
+                    var imageUrl = '/get_histogram/?t=' + new Date().getTime();
+                    document.getElementById('imageContainer1').innerHTML = '<img src="' + imageUrl + '" alt="Histogram">';
+
+                    var imageUrl = '/get_predicted_histogram/?t=' + new Date().getTime();
+                    document.getElementById('imageContainer2').innerHTML = '<img src="' + imageUrl + '" alt="Histogram">';
+
+                    document.getElementById('dataPlace').style.display = 'flex';
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

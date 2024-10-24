@@ -222,7 +222,7 @@ def start_forecast(profession, experience, employment, schedule, regions, method
     plt.title(f'Распределение зарплат по {profession}', fontsize=15)
     plt.xlabel('Зарплата', fontsize=12)
     plt.ylabel('Количество', fontsize=12)
-    plt.savefig('histogram.png')  # Сохраняем график в файл 'graph.png'
+    plt.savefig('static/images/histogram.png')  # Сохраняем график в файл 'histogram.png'
 
     df_encoded = pd.get_dummies(df_combined, columns=['Experience', 'Employment', 'Schedule'])
 
@@ -274,7 +274,7 @@ def start_forecast(profession, experience, employment, schedule, regions, method
     plt.ylabel('Зарплата', fontsize=12)
 
     # Сохраняем график в файл 'predicted_histogram.png'
-    plt.savefig('predicted_histogram.png')
+    plt.savefig('static/images/predicted_histogram.png')
 
     return {"rmse": normal_rmse, "y_pred": y_pred.tolist() if isinstance(y_pred, np.ndarray) else y_pred}
 
@@ -316,13 +316,13 @@ def remove_empty_strings(regions):
 
 
 def get_histogram(request):
-    image_path = 'histogram.png'
+    image_path = 'static/images/histogram.png'
     response = FileResponse(open(image_path, 'rb'), content_type='image/png')
     return response
 
 
 def get_predicted_histogram(request):
-    image_path = 'predicted_histogram.png'
+    image_path = 'static/images/predicted_histogram.png'
     response = FileResponse(open(image_path, 'rb'), content_type='image/png')
     return response
 
