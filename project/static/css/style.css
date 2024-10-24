@@ -1,0 +1,190 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+.menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #ddd;
+    padding: 20px 0;
+}
+.menu button {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 30px;
+}
+.main-input {
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.input-profession {
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px
+}
+.other-input {
+    width: 200px;
+    height: 30px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+.input-container button {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: transform 0.3s step-start;
+}
+.input-container button:active  {
+    transform: scale(0.9);
+}
+.other-input:focus {
+    border-color: black;
+    outline: none;
+}
+.modal {
+    display: none; /* По умолчанию скрыто */
+    position: fixed; /* Фиксированное позиционирование */
+    z-index: 1; /* Находится над всеми другими элементами */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включить прокрутку, если необходимо */
+    background-color: rgb(0,0,0); /* Черный фон с прозрачностью */
+    background-color: rgba(0,0,0,0.4); /* Черный фон с прозрачностью */
+}
+
+/* Содержимое модального окна */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% от верхнего края и центрировано */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ширина модального окна */
+}
+
+/* Закрывающий элемент "X" */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Стили для поля поиска */
+#search {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Стили для списка регионов */
+#regionList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#regionList li {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+#regionList li:hover {
+    background-color: #f6f6f6;
+}
+#dataPlace {
+    width: 30%; /* Увеличиваем ширину до 100% */
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid black; /* Измените это на цвет и стиль границы .input-profession */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#rmse, #y_pred {
+    width: 45%;
+    text-align: center;
+}
+
+#imageContainer1 img {
+    width: 100%; /* Это уменьшит размер изображения до ширины контейнера */
+    max-width: 600px; /* Максимальная ширина изображения */
+    height: auto; /* Сохраняет пропорции изображения */
+}
+#imageContainer2 img {
+    width: 100%; /* Это уменьшит размер изображения до ширины контейнера */
+    max-width: 600px; /* Максимальная ширина изображения */
+    height: auto; /* Сохраняет пропорции изображения */
+}
+.input-profession, #dataPlace {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.methods {
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.methods button {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: transform 0.3s step-start;
+}
+
+.methods button:hover {
+    background-color: #bbb;
+}
+
+.methods button:active  {
+    transform: scale(0.9);
+}
+#currentMethod {
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+}
